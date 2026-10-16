@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0756a5">
+  <title>Voz do Sesc — Notícias que movimentam o jogo</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f4f8fc;
+      --panel2: #eaf2fa;
+      --text: #152b45;
+      --muted: #586b80;
+      --red: #0756a5;
+      --line: #d9e4ef;
+      --max: 1180px
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto
+    }
+
+    .topline {
+      background: var(--red);
+      color: white;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 0
+    }
+
+    .topline .wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: white;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 0 4px #ffffff30
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 10
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.35rem;
+      font-weight: 950;
+      letter-spacing: -.06em;
+      white-space: nowrap
+    }
+
+    .brand-mark {
+      background: var(--red);
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-size: .9rem;
+      letter-spacing: -.08em
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      color: #40566f;
+      font-size: .9rem;
+      font-weight: 700
+    }
+
+    nav a:hover {
+      color: var(--red)
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .live {
+      font-size: .75rem;
+      color: #0756a5;
+      font-weight: 900;
+      letter-spacing: .08em
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--line);
+      color: #152b45;
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 1.2rem
+    }
+
+    main {
+      padding: 34px 0 70px
+    }
+
+    .section-kicker {
+      font-size: .75rem;
+      color: var(--red);
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 0 0 12px
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 22px;
+      align-items: stretch
+    }
+
+    .hero-main {
+      min-height: 460px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      background: #222 url('images/protagonista-capa.jpg') center 35%/cover no-repeat;
+      isolation: isolate
+    }
+
+    .hero-main:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(4, 5, 8, .96) 0%, rgba(4, 5, 8, .55) 42%, rgba(4, 5, 8, .06) 100%);
+      z-index: -1
+    }
+
+    .hero-content {
+      position: absolute;
+      left: clamp(20px, 4vw, 42px);
+      right: clamp(20px, 4vw, 42px);
+      bottom: 32px
+    }
+
+    .tag {
+      display: inline-flex;
+      background: var(--red);
+      color: white;
+      font-size: .7rem;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 4px
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.55rem);
+      line-height: 1.04;
+      letter-spacing: -.055em;
+      margin: 14px 0 12px;
+      max-width: 780px
+    }
+
+    .hero p {
+      color: #f0f5fb;
+      max-width: 650px;
+      margin: 0;
+      font-size: 1rem
+    }
+
+    .byline {
+      font-size: .78rem;
+      color: #dce8f5;
+      margin-top: 18px
+    }
+
+    .side-stories {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 22px
+    }
+
+    .story {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 16px;
+      min-height: 210px;
+      isolation: isolate
+    }
+
+    .story-image {
+      position: absolute;
+      inset: 0;
+      background-position: center;
+      background-size: cover;
+      z-index: -2;
+      opacity: .72
+    }
+
+    .story:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #08090cf0 0%, #08090c28 100%);
+      z-index: -1
+    }
+
+    .story-content {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px
+    }
+
+    .story h2 {
+      font-size: 1.28rem;
+      line-height: 1.15;
+      letter-spacing: -.03em;
+      margin: 10px 0 7px
+    }
+
+    .story small {
+      color: #e3ecf6
+    }
+
+    .ticker {
+      margin: 24px 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 13px 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden
+    }
+
+    .ticker-label {
+      color: white;
+      background: var(--red);
+      font-size: .7rem;
+      font-weight: 950;
+      padding: 5px 8px;
+      border-radius: 4px;
+      white-space: nowrap
+    }
+
+    .ticker p {
+      margin: 0;
+      color: #d6d8dd;
+      font-size: .86rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px
+    }
+
+    .section-head h2 {
+      font-size: 1.75rem;
+      letter-spacing: -.05em;
+      margin: 0
+    }
+
+    .section-head a {
+      font-size: .85rem;
+      color: var(--red);
+      font-weight: 800
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+
+    .news-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      border-color: #75a4d3
+    }
+
+    .thumb {
+      height: 190px;
+      background: #242730 center/cover no-repeat;
+      position: relative
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center
+    }
+
+    .thumb span {
+      position: absolute;
+      left: 13px;
+      top: 13px;
+      background: #0756a5e8;
+      color: white;
+      border: 1px solid #ffffff22;
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-size: .67rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .07em
+    }
+
+    .card-body {
+      padding: 18px
+    }
+
+    .card-body h3 {
+      font-size: 1.12rem;
+      line-height: 1.25;
+      letter-spacing: -.025em;
+      margin: 0 0 9px
+    }
+
+    .card-body p {
+      font-size: .87rem;
+      color: var(--muted);
+      margin: 0 0 14px
+    }
+
+    .meta {
+      font-size: .72rem;
+      color: #718197;
+      font-weight: 700
+    }
+
+    .feature {
+      margin: 42px 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .feature-photo {
+      min-height: 340px;
+      background: url('images/protagonista-pos-jogo.jpg') center/cover no-repeat #292c34
+    }
+
+    .feature-copy {
+      padding: clamp(24px, 4vw, 46px);
+      align-self: center
+    }
+
+    .feature-copy h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -.05em;
+      margin: 12px 0
+    }
+
+    .feature-copy p {
+      color: var(--muted)
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--red);
+      padding: 11px 15px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: .85rem;
+      margin-top: 8px
+    }
+
+    .button:hover {
+      background: #064783
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+      color: var(--muted);
+      font-size: .8rem
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap
+    }
+
+    .notice {
+      font-size: .75rem;
+      color: #718197;
+      margin-top: 20px
+    }
+
+    @media(max-width:850px) {
+      .hero {
+        grid-template-columns: 1fr
+      }
+
+      .hero-main {
+        min-height: 440px
+      }
+
+      .side-stories {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto
+      }
+
+      .story {
+        min-height: 230px
+      }
+
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      nav {
+        gap: 15px
+      }
+
+      .feature {
+        grid-template-columns: 1fr
+      }
+
+      .feature-photo {
+        min-height: 300px
+      }
+    }
+
+    @media(max-width:620px) {
+      .wrap {
+        width: min(100% - 28px, var(--max))
+      }
+
+      .topline {
+        font-size: .68rem
+      }
+
+      .nav {
+        min-height: 66px
+      }
+
+      .brand {
+        font-size: 1.18rem
+      }
+
+      .brand-mark {
+        width: 30px;
+        height: 30px
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        padding: 18px 22px 22px;
+        background: #ffffff;
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        gap: 17px
+      }
+
+      nav.open {
+        display: flex
+      }
+
+      .menu-btn {
+        display: block
+      }
+
+      .live {
+        display: none
+      }
+
+      main {
+        padding-top: 22px
+      }
+
+      .hero-main {
+        min-height: 470px
+      }
+
+      .hero h1 {
+        font-size: 2.35rem
+      }
+
+      .hero-content {
+        bottom: 24px
+      }
+
+      .side-stories {
+        grid-template-columns: 1fr;
+        gap: 14px
+      }
+
+      .story {
+        min-height: 200px
+      }
+
+      .ticker {
+        margin: 18px 0 32px
+      }
+
+      .section-head h2 {
+        font-size: 1.5rem
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 14px
+      }
+
+      .thumb {
+        height: 210px
+      }
+
+      .feature {
+        margin: 30px 0
+      }
+
+      .feature-photo {
+        min-height: 240px
+      }
+
+      .feature-copy {
+        padding: 24px
+      }
+
+      .footer-row {
+        flex-direction: column;
+        gap: 8px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topline">
+    <div class="wrap"><span class="dot"></span> Voz do Sesc · Informação em campo</div>
+  </div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#" aria-label="Voz do Sesc início"><span class="brand-mark">VS</span> VOZ DO SESC<span
+          style="color:var(--red)">.</span></a>
+      <nav id="menu"><a href="#destaque">Destaques</a><a href="#futebol">Futebol</a><a href="#sesc">Sesc</a><a
+          href="#mundo">Mundo</a><a href="#economia">Economia</a></nav>
+      <div class="nav-right"><span class="live">● AO VIVO</span><button class="menu-btn" id="menuBtn"
+          aria-label="Abrir menu" aria-expanded="false">☰</button></div>
+    </div>
+  </header>
+  <main class="wrap">
+    <p class="section-kicker" id="destaque">A história do momento</p>
+    <section class="hero">
+      <article class="hero-main">
+        <div class="hero-content">
+          <span class="tag">Futebol · Exclusivo</span>
+          <h1>Entrou, virou o jogo e agora o Sesc quer saber quem é ele</h1>
+          <p>Depois de substituir um companheiro lesionado, o jovem atacante mudou o ritmo da partida e foi decisivo na
+            vitória. Agora, seu nome está no centro das conversas.</p>
+          <div class="byline">Por Redação Voz do Sesc &nbsp;·&nbsp; Especial de esporte &nbsp;·&nbsp; 6 min de leitura
+          </div>
+        </div>
+      </article>
+      <div class="side-stories">
+        <article class="story">
+          <div class="story-image" style="background-image:url('images/protagonista-em-campo.jpg')"></div>
+          <div class="story-content"><span class="tag">A ascensão</span>
+            <h2>De opção no banco a protagonista em uma única noite</h2><small>Perfil especial · 4 min</small>
+          </div>
+        </article>
+        <article class="story">
+          <div class="story-image" style="background-image:url('images/protagonista-pos-jogo.jpg')"></div>
+          <div class="story-content"><span class="tag">Bastidores</span>
+            <h2>O que mudou depois do apito final?</h2><small>Reportagem · 3 min</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="ticker"><span class="ticker-label">Última hora</span>
+      <p>O desempenho do jovem atacante virou assunto entre torcedores e comentaristas após a vitória dramática.</p>
+    </div>
+
+    <section id="futebol">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Dentro das quatro linhas</p>
+          <h2>O nome que tomou conta do futebol</h2>
+        </div><a href="#perfil">Ver perfil →</a>
+      </div>
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="thumb" style="background-image:url('images/protagonista-comemorando.jpg')"><span>Jogo
+              decisivo</span></div>
+          <div class="card-body">
+            <h3>A substituição que mudou tudo: entenda os minutos decisivos</h3>
+            <p>Com velocidade, personalidade e participação direta nas jogadas-chave, o atacante mudou o rumo do
+              confronto.</p>
+            <div class="meta">ESPECIAL · 5 MIN DE LEITURA</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="thumb" style="background-image:url('images/protagonista-em-campo.jpg')"><span>Análise</span></div>
+          <div class="card-body">
+            <h3>Por que a entrada do camisa 27 desmontou a defesa rival</h3>
+            <p>Movimentação, pressão alta e coragem para partir para cima: os detalhes por trás da virada.</p>
+            <div class="meta">ANÁLISE TÁTICA · 4 MIN</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="thumb" style="background-image:url('images/protagonista-entrevista.jpg')"><span>Personagem</span>
+          </div>
+          <div class="card-body">
+            <h3>Quem é o jogador por trás da atuação que surpreendeu no Sesc?</h3>
+            <p>Da rotina longe dos holofotes à noite que pode mudar sua carreira, conheça a trajetória do atleta.</p>
+            <div class="meta">PERFIL · 7 MIN DE LEITURA</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature" id="perfil">
+      <div class="feature-photo" role="img" aria-label="Foto do protagonista após a partida"></div>
+      <div class="feature-copy"><span class="tag">Perfil do jogador</span>
+        <h2>Uma noite pode mudar uma carreira inteira.</h2>
+        <p>Ele começou a partida no banco. Quando a lesão de um companheiro abriu espaço, recebeu a chance — e
+          aproveitou. A atuação decisiva transformou um nome pouco conhecido no assunto mais comentado da rodada.</p>
+        <p>O próximo capítulo ainda está por ser escrito, mas uma coisa é certa: depois daquela partida, ninguém vai
+          olhar para ele da mesma maneira.</p><a class="button" href="#noticias">Continuar lendo <span
+            aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section id="sesc">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Além do esporte</p>
+          <h2>Sesc e mundo agora</h2>
+        </div><a href="#mundo">Mais notícias →</a>
+      </div>
+      <div class="news-grid" id="noticias">
+        <article class="news-card">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Profissionais reunidos em ambiente de trabalho"><span>Sesc</span></div>
+          <div class="card-body">
+            <h3>Congresso promulga mudança na jornada de trabalho 6x1</h3>
+            <p>A medida prevê redução gradual da jornada semanal e dois dias de descanso remunerado, conforme a
+              cobertura publicada nesta sexta-feira.</p>
+            <div class="meta">ATUALIDADE · 16 OUT 2026</div>
+          </div>
+        </article>
+        <article class="news-card" id="economia">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Gráficos de desempenho econômico em uma tela"><span>Economia</span>
+          </div>
+          <div class="card-body">
+            <h3>Atividade econômica do país cresce em agosto</h3>
+            <p>Indicador divulgado pelo Banco Central aponta avanço mensal de 0,3%, em linha com as expectativas do
+              mercado.</p>
+            <div class="meta">ECONOMIA · 16 OUT 2026</div>
+          </div>
+        </article>
+        <article class="news-card" id="mundo">
+          <div class="thumb"><img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Edifício público associado à política"><span>Política</span>
+          </div>
+          <div class="card-body">
+            <h3>Debate sobre segurança pública volta ao centro da política nacional</h3>
+            <p>Declarações recentes reacendem discussões sobre legislação, responsabilização e políticas de segurança no
+              país.</p>
+            <div class="meta">POLÍTICA · 16 OUT 2026</div>
+          </div>
+        </article>
+      </div>
+      <p class="notice">Nota de produção: a história do jogador é fictícia, criada para o curta-metragem. As notícias
+        gerais são inspiradas em acontecimentos publicados em 16/10/2026; confirme os detalhes e atualize as matérias
+        antes de apresentar o site como um portal jornalístico real.</p>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-row">
+      <div class="brand"><span class="brand-mark">VS</span> VOZ DO SESC<span style="color:var(--red)">.</span></div>
+      <div>© 2026 Voz do Sesc · Projeto visual para produção audiovisual</div>
+      <div>Esporte · Sesc · Mundo</div>
+    </div>
+  </footer>
+  <script>
+    const menu = document.getElementById('menu'), btn = document.getElementById('menuBtn');
+    btn.addEventListener('click', () => { const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.textContent = open ? '✕' : '☰' });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = '☰' }));
+  </script>
+</body>
+
+</html>
